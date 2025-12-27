@@ -43,20 +43,20 @@ function generateRSS(newsData) {
       <description><![CDATA[ ${newsContent} ]]></description>
       <pubDate>${pubDate}</pubDate>
       <guid isPermaLink="false">${guid}</guid>
-      <link>https://news.ravelloh.top?date=${date.replaceAll("/","")}</link>
+      <link>https://swimminghao.github.io?date=${date.replaceAll("/","")}</link>
     </item>`;
   
   const rssContent = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>EverydayNews</title>
-    <link>https://news.ravelloh.top</link>
+    <title>EverydayNews-Private</title>
+    <link>https://swimminghao.github.io</link>
     <description>https://news.ravelloh.top</description>
     <language>zh-CN</language>
     <lastBuildDate>${buildDate}</lastBuildDate>
     <pubDate>${pubDate}</pubDate>
     <ttl>1440</ttl>
-    <generator>EverydayNews RSS Generator</generator>${rssItems}
+    <generator>EverydayNews Private RSS Generator</generator>${rssItems}
   </channel>
 </rss>`;
 
