@@ -38,9 +38,12 @@ jobs:
                   git config --local user.email "dr_hamilton@foxmail.com"
                   git config --local user.name "Ravello-H"
                   git add -A
-                  git commit -m "`date '+%Y-%m-%d %H:%M:%S'`" || exit
-                  git status
-                  git push
+                  if [[ -n $(git status --porcelain) ]]; then
+		      git commit -m "自动更新: $(date '+%Y-%m-%d %H:%M:%S')"
+                      git push
+                  else
+                      echo "没有更改可提交"
+                  fi
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     deploy:
