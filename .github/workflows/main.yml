@@ -19,10 +19,10 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v3
-            - name: 'Git set'
-              run: |
-                  git init
-                  git pull
+            # - name: 'Git set'
+            #   run: |
+            #       git init
+            #       git pull
             - name: 'Setup nodejs'
               uses: actions/setup-node@v3
               with:
@@ -33,6 +33,7 @@ jobs:
             - name: 'Working'
               run: node update.js
             - name: Commit files
+              if: steps.update-step.outputs.has_updates == 'true'
               continue-on-error: True
               run: |
                   git config --local user.email "dr_hamilton@foxmail.com"
@@ -46,6 +47,15 @@ jobs:
                   fi
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  # 添加上传制品步骤
+            - name: Upload build artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                name: built-files
+                path: |
+                  .
+                  !node_modules
+                retention-days: 1
     deploy:
         needs: build
         environment:
@@ -55,7 +65,7 @@ jobs:
         steps:
           # - name: Checkout
           #   uses: actions/checkout@v4
-          - name: Download artifacts from build
+          - name: 'Download artifacts from build'
             uses: actions/download-artifact@v4
             with:
                 name: built-files

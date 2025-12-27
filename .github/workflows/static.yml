@@ -5,6 +5,10 @@ on:
   # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
+    paths-ignore:    # 忽略数据文件的更新，避免与main.yaml冲突
+      - 'data/**'
+      - 'rss.xml'
+      - 'latest.json'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -18,8 +22,8 @@ permissions:
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  group: "pages-deploy"
+  cancel-in-progress: true
 
 jobs:
   # Single deploy job since we're just deploying
