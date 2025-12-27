@@ -35,7 +35,7 @@ function generateRSS(newsData) {
   });
   
   const title = `${date}`;
-  const guid = `everydaynews-${date.replaceAll('/', '-')}`;
+  const guid = `everydaynews-private-${date.replaceAll('/', '-')}`;
   
   const rssItems = `
     <item>
